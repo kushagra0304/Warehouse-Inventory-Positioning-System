@@ -32,7 +32,17 @@ Using npm:
 npm run install (I made this script)
 ```
 
-### 3. Start Backend and Frontend
+Using brew:
+```sh
+brew install mkcert 
+```
+
+### 3. Create SSL certificates
+```sh
+npm run createCerts
+```
+
+### 4. Start Backend and Frontend
 ```sh
 npm run frontend
 ```
