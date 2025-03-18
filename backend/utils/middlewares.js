@@ -28,7 +28,7 @@ const morganRequestLogger = morgan((tokens, req, res) => {
 })
 
 const unknownEndpoint = async (request, response) => {
-  response.status(404).send((await fs.promises.readFile(path.join(__dirname, "../public/four0four.html"))).toString());
+  response.status(404).send((await fs.promises.readFile(path.join(__dirname, "../build/four0four.html"))).toString());
 };
 
 const errorHandler = async (error, request, response, next) => {
@@ -49,7 +49,7 @@ const errorHandler = async (error, request, response, next) => {
   } 
 
   logger.debug(error);
-  response.send((await fs.promises.readFile(path.join(__dirname, "../public/error.html"))).toString());
+  response.send((await fs.promises.readFile(path.join(__dirname, "../build/error.html"))).toString());
 
   next();
 };

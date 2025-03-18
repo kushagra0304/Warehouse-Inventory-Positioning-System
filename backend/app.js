@@ -1,49 +1,56 @@
-// ---------------------------------------------------------
-// NPM Packages
-
 const express = require('express');
 const cors = require('cors');
+const path = require('path');
 
 // ---------------------------------------------------------
-// My imports 
-
+// My Imports 
 const config = require('./utils/config');
 const adminRouter = require('./controllers/admin');
 const tagRouter = require('./controllers/tag');
 const scannerRouter = require('./controllers/scanner');
 const middlewares = require('./utils/middlewares');
 
-// ---------------------------------------------------------
-// Initialization
-
 const app = express();
 
 // ---------------------------------------------------------
-// DB initialisation
+// Middleware List
 
-/* Database will be init and cached the first time you import it. */
+if (config.ENVIRONMENT === 'development') {
+    const { morganRequestLogger } = require('./utils/middlewares');
+    app.use(morganRequestLogger);
+    app.use(cors());
+}
+
+app.use(express.json());
 
 // ---------------------------------------------------------
-// Middleware list
+// Static File Serving (SPA)
 
-if (config.ENVIROMENT === 'development') {
-    app.use(require('./utils/middlewares').morganRequestLogger);
-}
-app.use(cors({ origin: 'http://localhost:5173' }));
-app.use('/', express.static(__dirname + '/public'));
-app.use(express.json());
-// ----------------------------
-// Controllers
+const buildPath = path.join(__dirname, '/build');
+console.log(buildPath)
+app.use(express.static(buildPath));
+
+// ---------------------------------------------------------
+// API Routes
+
 app.use('/api/admin', adminRouter);
 app.use('/api/scanner', scannerRouter);
 app.use('/api/tag', tagRouter);
-// ----------------------------
-app.use(middlewares.unknownEndpoint);
-app.use(middlewares.errorHandler); // this has to be the last loaded middleware.
 
 // ---------------------------------------------------------
-// Export express app
+// Handle SPA Routes (Fallback to React index.html)
+
+// app.get('*', (req, res) => {
+//     res.sendFile(path.join(buildPath, 'index.html'));
+// });
+
+// ---------------------------------------------------------
+// Error Handling Middlewares
+
+app.use(middlewares.unknownEndpoint);
+app.use(middlewares.errorHandler);
+
+// ---------------------------------------------------------
+// Export Express App
 
 module.exports = app;
-
-// ---------------------------------------------------------

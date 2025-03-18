@@ -1,0 +1,20 @@
+{
+  "name": "warehouse-inventory-positioning-system",
+  "version": "1.0.0",
+  "description": "",
+  "homepage": "https://github.com/kushagra0304/Warehouse-Inventory-Positioning-System#readme",
+  "bugs": {
+    "url": "https://github.com/kushagra0304/Warehouse-Inventory-Positioning-System/issues"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/kushagra0304/Warehouse-Inventory-Positioning-System.git"
+  },
+  "license": "ISC",
+  "author": "Kushagra agarwal",
+  "scripts": {
+    "install": "cd frontend && npm install && cd ../backend && npm install",
+    "frontend": "cd frontend && npm run dev",
+    "backend": "cd backend && npm run dev"
+  }
+}

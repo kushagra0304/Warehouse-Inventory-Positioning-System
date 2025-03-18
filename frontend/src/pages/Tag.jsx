@@ -45,7 +45,7 @@ export default function Tag() {
           uid
         );
 
-        if (!(response.statusText === "OK")) throw new Error("Failed to send location");
+        if (!(response.status === 200)) throw new Error("Failed to send location");
         setPingStatus(`Pinged at ${new Date().toLocaleTimeString()}`);
       } catch (err) {
         setError(err.message);

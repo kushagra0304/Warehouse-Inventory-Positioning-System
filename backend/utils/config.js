@@ -1,7 +1,7 @@
 const PORT = process.env.PORT || 3000;
-const ENVIROMENT = process.env.ENVIROMENT;
+const ENVIRONMENT = process.env.ENVIRONMENT;
 
 module.exports = {
     PORT,
-    ENVIROMENT
+    ENVIRONMENT
   };
