@@ -12,4 +12,10 @@ export default defineConfig({
     outDir: path.resolve(__dirname, '../backend/build'), // Output folder set to backend/public
     emptyOutDir: true, // Clears previous build files
   },
+  server: {
+    https: {
+      key: '../localhost+1-key.pem', // Path to your private key
+      cert: '../localhost+1.pem', // Path to your certificate
+    }
+  },
 })
